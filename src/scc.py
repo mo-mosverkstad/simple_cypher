@@ -1,9 +1,11 @@
 # scc is shortcut for Simple cipher code.
-def finder(d,v):
-    i = d.values().index(v)
-    return d.keys()[i]
+def finder(d,value):
+    for k, v in d.items():
+        if v == value: return k
+    return -1
         
 
+# dont use handle now:::
 def handle(inputs,howto):
     holding = []
     mapping = {}
@@ -42,7 +44,22 @@ def handle(inputs,howto):
                 new_text += inputs[int(i)]
     return new_text
 
-inputs = raw_input('INPUT ...')
-howto = raw_input('PLEASE ENTER THE WAY ...')
 
-print handle(inputs,howto)
+'''
+inputs = input('INPUT ...')
+howto = input('PLEASE ENTER THE WAY ...')
+
+print(handle(inputs,howto))
+'''
+
+def mapping(inputs,key,howto):
+    new_text = ''
+    for i in inputs:
+        if howto == 'enc':
+            new_text += key[i]
+        elif howto == 'dec':
+            new_text += finder(key,i)
+    return new_text
+
+print(mapping('abc',{'a':'b','b':'c','c':'a'},'enc'))
+print(mapping('bca',{'a':'b','b':'c','c':'a'},'dec'))

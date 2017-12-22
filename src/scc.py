@@ -61,5 +61,14 @@ def mapping(inputs,key,howto):
             new_text += finder(key,i)
     return new_text
 
+def transposition(inputs,key,howto):
+    new_text = ''
+    if howto == 'enc':
+        for i in key:
+            new_text += inputs[int(i)]
+    if howto == 'dec':
+        
+    return new_text
 print(mapping('abc',{'a':'b','b':'c','c':'a'},'enc'))
 print(mapping('bca',{'a':'b','b':'c','c':'a'},'dec'))
+print(transposition('abcde',[0,4,1,3,2],'enc'))

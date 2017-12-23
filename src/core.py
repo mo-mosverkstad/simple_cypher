@@ -12,11 +12,7 @@
 # Usage        : -
 # =========================================================================== #
 
-# handle_cypher(text, codec_dict) -> encrypted or decrypted text
+# handle_cypher(text, algorithm_obj) -> encrypted or decrypted text
 
-def handle_cypher(text, codec_dict):
-    new_text = str()
-    for c in text:
-        new_text += codec_dict[c]
-    return new_text
-    #return ''.join([codec_dict[c] for c in plain])
+def handle_cypher(text, algorithm_obj):
+    return algorithm_obj.cypher(text)

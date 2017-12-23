@@ -2,7 +2,9 @@ from profile import handle_profile
 from core import handle_cypher
 
 test_data_dict = {'TC_CAESAR_ENC_+3': ('abcdefg', 'enc#caesar#+3', 'defghij'), \
-                  'TC_CAESAR_DEC_+3': ('defghij', 'dec#caesar#+3', 'abcdefg')}
+                  'TC_CAESAR_DEC_+3': ('defghij', 'dec#caesar#+3', 'abcdefg'), \
+                  'TC_SHUFFLE_ENC_4': ('abcdefgh', 'enc#shuffle#4', 'dcbahgfe'), \
+                  'TC_SHUFFLE_DEC_4': ('dcbahgfe', 'dec#shuffle#4', 'abcdefgh')}
 
 def run_test(test_data_value):
     text, profile, expect = test_data_value

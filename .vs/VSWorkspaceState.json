@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\Chiffer",
-    "\\src"
+    "\\src",
+    "\\src\\algorithm"
   ],
-  "SelectedNode": "\\src\\profile.py",
+  "SelectedNode": "\\src\\test_cypher.py",
   "PreviewInSolutionExplorer": false
 }

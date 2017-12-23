@@ -17,11 +17,15 @@
 #     - profile, the format: <howto: enc/dec>#<algorithm>#<key>
 
 import re
+from profile import handle_profile
+from core import handle_cypher
 
-def wrapper(text,key):
+def wrapper(text,longkey):
     continueflag = True
-    sub_keys = key.split('#')
+    sub_keys = longkey.split('#')
     if len(sub_keys) == 3:
-        continueflag = True
-    else:
-        continueflag = False
+        return handle_cypher(text, handle_profile(longkey))
+
+inputs = input('>>>')
+key = input('>>>')
+print(wrapper(inputs,'enc#caesar#+3'))

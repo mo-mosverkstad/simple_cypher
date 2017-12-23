@@ -8,4 +8,4 @@ class caesar(base_mapping):
         return dict(zip(self.whole_list[self.key:] + self.whole_list[:self.key], self.whole_list))
 
     def cypher(self, text):
-        return base_mapping.cypher(self, text, self.__enc_dict(), self.__dec_dict())
+        return super().cypher(text, self.__enc_dict(), self.__dec_dict())

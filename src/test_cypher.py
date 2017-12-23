@@ -1,10 +1,14 @@
 from profile import handle_profile
 from core import handle_cypher
 
-test_data_dict = {'TC_CAESAR_ENC_+3': ('abcdefg', 'enc#caesar#+3', 'defghij'), \
-                  'TC_CAESAR_DEC_+3': ('defghij', 'dec#caesar#+3', 'abcdefg'), \
+test_data_dict = {'TC_CAESAR_ENC_+3': ('abcdefg',  'enc#caesar#+3', 'defghij'),  \
+                  'TC_CAESAR_DEC_+3': ('defghij',  'dec#caesar#+3', 'abcdefg'),  \
                   'TC_SHUFFLE_ENC_4': ('abcdefgh', 'enc#shuffle#4', 'dcbahgfe'), \
-                  'TC_SHUFFLE_DEC_4': ('dcbahgfe', 'dec#shuffle#4', 'abcdefgh')}
+                  'TC_SHUFFLE_DEC_4': ('dcbahgfe', 'dec#shuffle#4', 'abcdefgh'), \
+                  'TC_REVERSE_ENC':   ('ADEBGKOT', 'enc#reverse#',  'TOKGBEDA'), \
+                  'TC_REVERSE_DEC':   ('TOKGBEDA', 'dec#reverse#',  'ADEBGKOT'), \
+                  'TC_ONECYCLE_ENC_2':('O5QR37N9', 'enc#onecycle#2','O9Q53RN7'), \
+                  'TC_ONECYCLE_DEC_2':('O9Q53RN7', 'dec#onecycle#2','O5QR37N9')}
 
 def run_test(test_data_value):
     text, profile, expect = test_data_value

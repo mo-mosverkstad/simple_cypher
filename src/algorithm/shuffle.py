@@ -11,4 +11,3 @@ class shuffle(base_mapping):
 
     def cypher(self, text):
         return base_mapping.cypher(self, text, self.__enc_dec_dict(), self.__enc_dec_dict())
-            

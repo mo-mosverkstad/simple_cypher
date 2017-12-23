@@ -1,3 +1,20 @@
+# ========================= CODING FILE INFORMATION ========================= #
+# File         : profile.py
+# Date         : 2017-Dec-22
+# Last modified: 2017-Dec-23
+#
+# Author       : Mo
+#
+# Description  : This profile.py file provides the codec dictionary by profile
+#
+# Dependency   : Python 3.6, re
+#
+# Usage        : -
+# =========================================================================== #
+
+# handle_profile(profile) -> codec_dict
+# profile = <howto: enc/dec>#<algorithm>#<key>
+
 import re
 
 def generate_ascii_list(start, stop):
@@ -22,15 +39,7 @@ def caesar_dec(key):
     whole_list = lowcase_list() + upcase_list() + digit_list()
     return dict(zip(whole_list[k:]+whole_list[:k], whole_list))
 
-def handle(plain, profile):
-    howto, codec, key = re.split('#', profile)
-    func_str = codec + '_' + howto
-    codec_dict = eval(func_str)(key)
-    #for c in plain:
-    #    new_text += codec_dict[c]
-    #return new_text
-    return ''.join([codec_dict[c] for c in plain])
-
-
-print(handle('abcdefg', 'enc#caesar#+3')=='defghij')
-print(handle('defghij', 'dec#caesar#+3')=='abcdefg')
+def handle_profile(profile):
+    howto, algorithm, key = re.split('#', profile)
+    func_str = algorithm + '_' + howto
+    return eval(func_str)(key)

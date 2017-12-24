@@ -15,16 +15,21 @@ class railfence(base_transposition):
         sorteds = sorted(railfence_dict.items(), key=operator.itemgetter(1))
         return [i[0] for i in sorteds]
 
-    def __generate_railfence_dict(self, orig_index_list, railfence_list):
-        return dict(zip(railfence_list, orig_index_list))
+    def __generate_railfence_dict(self, list_1, list_2):
+        return dict(zip(list_1, list_2))
 
     def __enc_railfence(self,text):
         return self.transposition_core( \
-            self.__generate_railfence_dict(list(range(len(text))), self.__generate_railfence_list(len(text))), \
+            self.__generate_railfence_dict(self.__generate_railfence_list(len(text)), list(range(len(text)))), \
             text)
-        
+
+    def __dec_railfence(self,text):
+        return self.transposition_core( \
+            self.__generate_railfence_dict(list(range(len(text))),self.__generate_railfence_list(len(text))), \
+            text)
+
 
     def cypher(self, text):
         if self.howto == 'enc': return self.__enc_railfence(text)
-        #else: return self.__dec_onecycle(text)
+        else: return self.__dec_railfence(text)
         

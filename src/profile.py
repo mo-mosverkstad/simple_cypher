@@ -12,12 +12,24 @@
 # Usage        : -
 # =========================================================================== #
 
-# handle_profile(profile) -> algorithm class object
+# handle_profile(profile) -> algorithm class object if ok else error info str
 # profile = <howto: enc/dec>#<algorithm>#<key>
 
 import re
 
+PROF_DELIMITER = '#'
+
 def handle_profile(profile):
-    howto, algorithm, key = re.split('#', profile)
-    exec(f'from algorithm.{algorithm} import {algorithm}')
-    return eval(algorithm + '(howto, key)')
+    check, howto, algorithm, key = check_profile(profile)
+    if check:
+        exec(f'from algorithm.{algorithm} import {algorithm}')
+        return eval(algorithm + '(howto, key)')
+    else:
+        return None
+
+def check_profile(profile):
+    if len(profile.split(PROF_DELIMITER)) == 3:
+        howto, algorithm, key = re.split(PROF_DELIMITER, profile)
+        return True, howto, algorithm, key
+    else:
+        return False, None, None, None

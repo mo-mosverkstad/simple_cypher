@@ -1,7 +1,7 @@
 # ========================= CODING FILE INFORMATION ========================= #
 # File         : wrapper.py
 # Date         : 2017-Dec-23
-# Last modified: 2017-Dec-23
+# Last modified: 2017-Dec-30
 #
 # Author       : Mo
 #
@@ -20,12 +20,18 @@ import re
 from profile import handle_profile
 from core import handle_cypher
 
-def wrapper(text,longkey):
-    continueflag = True
-    sub_keys = longkey.split('#')
-    if len(sub_keys) == 3:
-        return handle_cypher(text, handle_profile(longkey))
+PROMPT = ' >>>'
+PROMPT_TEXT = 'TEXT' + PROMPT
+PROMPT_PROF = 'PROF' + PROMPT
 
-inputs = input('>>>')
-key = input('>>>')
-print(wrapper(inputs,'enc#caesar#+3'))
+
+def wrapper():
+    exitFlag = False
+    while not exitFlag:
+        text = input(PROMPT_TEXT)
+        prof = input(PROMPT_PROF)
+        if text == 'exit' and prof == '':
+            exitFlag = True
+        print(handle_cypher(text, handle_profile(prof)))
+
+wrapper()

@@ -7,7 +7,7 @@
 #
 # Description  : The cli wrapper for scc (Simple Cypher Coding)
 #
-# Dependency   : Python 3.6, re
+# Dependency   : Python 3.6, re, sys
 #
 # Usage        : python wrapper.py
 # =========================================================================== #
@@ -17,21 +17,50 @@
 #     - profile, the format: <howto: enc/dec>#<algorithm>#<key>
 
 import re
+import sys
 from profile import handle_profile
 from core import handle_cypher
 
-PROMPT = ' >>>'
-PROMPT_TEXT = 'TEXT' + PROMPT
-PROMPT_PROF = 'PROF' + PROMPT
+PROMPT_ROOT   = 'SCC:>'
+PROMPT_CYPHER = 'CYPHER:>>'
+PROMPT_PROF   = 'PROF:>>'
 
+COMMAND_EXIT = 'exit'
+COMMAND_CYPHER = 'cypher'
+COMMAND_PROFILE = 'prof'
+COMMAND_UP = 'up'
+
+def system_exit(current_status):
+    sys.exit()
+    return current_status
+
+def system_cypher(current_status):
+    return PROMPT_CYPHER
+
+def system_profile(current_status):
+    return PROMPT_PROF
+
+def system_up(current_status):
+    return PROMPT_ROOT
+
+SCC_DICT = {PROMPT_ROOT:
+                {COMMAND_EXIT: 'system_exit',
+                 COMMAND_CYPHER: 'system_cypher',
+                 COMMAND_PROFILE: 'system_profile'},
+            PROMPT_CYPHER:
+                {COMMAND_EXIT: 'system_exit',
+                 COMMAND_UP: 'system_up'},
+            PROMPT_PROF:
+                {COMMAND_EXIT: 'system_exit',
+                 COMMAND_UP: 'system_up'}}
 
 def wrapper():
-    exitFlag = False
-    while not exitFlag:
-        text = input(PROMPT_TEXT)
-        prof = input(PROMPT_PROF)
-        if text == 'exit' and prof == '':
-            exitFlag = True
-        print(handle_cypher(text, handle_profile(prof)))
+    status = PROMPT_ROOT
+    while True:
+        command = input(status)
+        #print(SCC_DICT[status][command] + '(status)')
+        func_str = SCC_DICT[status].get(command)
+        if func_str != None:
+            status = eval(func_str + '(status)')
 
 wrapper()

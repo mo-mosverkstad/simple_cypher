@@ -1,7 +1,7 @@
 class base_mapping:
     def __init__(self, howto, key):
         self.howto = howto
-        self.key = int(key)
+        self.key = key
         self.whole_list = self.__lowcase_list() + self.__upcase_list() + self.__digit_list()
         self.type = 'MAPPING'
 

@@ -10,7 +10,10 @@ test_data_dict = {'TC_CAESAR_ENC_+3': ('abcdefg',  'enc#caesar#+3', 'defghij'), 
                   'TC_ONECYCLE_ENC_2':('O5QR37N9', 'enc#onecycle#2','O9Q53RN7'), \
                   'TC_ONECYCLE_DEC_2':('O9Q53RN7', 'dec#onecycle#2','O5QR37N9'), \
                   'TC_RAILFENCE_ENC3':('PLAINTXT', 'enc#railfence#3','PNLITTAX'), \
-                  'TC_RAILFENCE_DEC3':('PNLITTAX', 'dec#railfence#3','PLAINTXT')}
+                  'TC_RAILFENCE_DEC3':('PNLITTAX', 'dec#railfence#3','PLAINTXT'), \
+                  'TC_ATBASH_ENC____':('ABCDEF', 'enc#atbash#' , 'JIHGFE'), \
+                  'TC_ATBASH_DEC____':('JIHGFE', 'dec#atbash#' , 'ABCDEF'), \
+                  'TC_EXTERNAL_ENC_1':('ABCDEF', 'enc#external#"".join(list(reversed(self.whole_list)))', 'JIHGFE')}
 
 def run_test(test_data_value):
     text, profile, expect = test_data_value

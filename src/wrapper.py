@@ -22,45 +22,63 @@ from profile import handle_profile
 from core import handle_cypher
 
 PROMPT_ROOT   = 'SCC:>'
-PROMPT_CYPHER = 'CYPHER:>>'
 PROMPT_PROF   = 'PROF:>>'
 
 COMMAND_EXIT = 'exit'
-COMMAND_CYPHER = 'cypher'
 COMMAND_PROFILE = 'prof'
 COMMAND_UP = 'up'
+COMMAND_ENC = 'enc '
+COMMAND_DEC = 'dec '
+COMMAND_EDIT = 'edit'
 
-def system_exit(current_status):
+CONFIG_HOWTO = 'enc'
+CONFIG_ALGORITHM = 'caesar'
+CONFIG_KEY = '+3'
+
+def system_exit(current_status, algorithm, key):
     sys.exit()
-    return current_status
+    return current_status, algorithm, key
 
-def system_cypher(current_status):
-    return PROMPT_CYPHER
 
-def system_profile(current_status):
-    return PROMPT_PROF
+def system_profile(current_status, algorithm, key):
+    return PROMPT_PROF, algorithm, key
 
-def system_up(current_status):
-    return PROMPT_ROOT
+def system_up(current_status, algorithm, key):
+    return PROMPT_ROOT, algorithm, key
+
+def system_config_edit(current_status, algorithm, key):
+    print(f'The current algorithm is "{algorithm}"')
+    print(f'The current key is "{key}"')
+    algorithm = input('algorithm...')
+    key       = input('key      ...')
+    print('Algorithm "%s" and key "%s" are changed now.'%(algorithm, key))
+    return PROMPT_ROOT, algorithm, key
 
 SCC_DICT = {PROMPT_ROOT:
                 {COMMAND_EXIT: 'system_exit',
-                 COMMAND_CYPHER: 'system_cypher',
-                 COMMAND_PROFILE: 'system_profile'},
-            PROMPT_CYPHER:
-                {COMMAND_EXIT: 'system_exit',
-                 COMMAND_UP: 'system_up'},
+                 COMMAND_PROFILE: 'system_profile',
+                 COMMAND_EDIT: 'system_config_edit'},
             PROMPT_PROF:
                 {COMMAND_EXIT: 'system_exit',
-                 COMMAND_UP: 'system_up'}}
+                 COMMAND_UP: 'system_up'},
+           }
 
-def wrapper():
+def get_scc_dict_values():
+    return [func for cmd in SCC_DICT.values() for func in cmd.values()]
+
+def wrapper(howto=CONFIG_HOWTO, algorithm=CONFIG_ALGORITHM, key=CONFIG_KEY):
     status = PROMPT_ROOT
     while True:
         command = input(status)
-        #print(SCC_DICT[status][command] + '(status)')
         func_str = SCC_DICT[status].get(command)
-        if func_str != None:
-            status = eval(func_str + '(status)')
+        if func_str in get_scc_dict_values():
+            status, algorithm, key = eval(func_str + '(status, algorithm, key)')
+        elif (command.startswith(COMMAND_ENC) or command.startswith(COMMAND_DEC)) and (status == PROMPT_ROOT):
+            howto = command[:3]
+            text = command[4:]
+            prof = howto + '#' + algorithm + '#' + key
+            print(handle_cypher(text, handle_profile(prof)))
+            
+
 
 wrapper()

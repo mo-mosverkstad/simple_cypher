@@ -1,0 +1,6 @@
+mapping;atbash;<built in>
+mapping;caesar;<built in>
+mapping;shuffle;<built in>
+transposition;onecycle;<built in>
+transposition;railfence;<built in>
+transposition;reverse;<built in>

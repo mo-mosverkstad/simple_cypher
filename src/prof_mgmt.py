@@ -1,7 +1,7 @@
 # ========================= CODING FILE INFORMATION ========================= #
 # File         : prof_mgmt.py
 # Date         : 2018-Jan-04
-# Last modified: 2018-Jan-04
+# Last modified: 2018-Jan-07
 #
 # Author       : Mo
 #
@@ -18,17 +18,11 @@
 # prof_edit (algorithm, code) -> None
 # prof_delete (algorithm) -> None
 
+from data_mgmt import data_read_prof, data_write_prof
+
 CODE_BUILT_IN = '<built in>'
 
-prof_dict = {'mapping':{'atbash':CODE_BUILT_IN,
-                        'caesar':CODE_BUILT_IN,
-                        'shuffle':CODE_BUILT_IN},
-             'transposition':{'onecycle':CODE_BUILT_IN,
-                              'railfence':CODE_BUILT_IN,
-                              'reverse':CODE_BUILT_IN}
-             }
-
-def find_type(algorithm):
+def find_type(prof_dict, algorithm):
     for keys, contents in list(prof_dict.items()):
         for k,v in list(contents.items()):
             if k == algorithm:
@@ -36,18 +30,24 @@ def find_type(algorithm):
     return None
 
 def prof_list ():
-    return prof_dict
+    return data_read_prof()
 
 def prof_new (type, algorithm):
+    prof_dict = data_read_prof()
     prof_dict[type][algorithm] = ''
+    data_write_prof(prof_dict)
 
 def prof_edit (algorithm, code):
-    type = find_type(algorithm)
-    if type != None and prof_dict[type][algorithm] != CODE_BUILT_IN:
-        prof_dict[find_type(algorithm)][algorithm] = code
+    prof_dict = data_read_prof()
+    algorithm_type = find_type(prof_dict, algorithm)
+    if algorithm_type != None and prof_dict[algorithm_type][algorithm] != CODE_BUILT_IN:
+        prof_dict[algorithm_type][algorithm] = code
+    data_write_prof(prof_dict)
 
 def prof_delete (algorithm):
-    type = find_type(algorithm)
-    if type != None and prof_dict[type][algorithm] != CODE_BUILT_IN:
-        del prof_dict[find_type(algorithm)][algorithm]
+    prof_dict = data_read_prof()
+    algorithm_type = find_type(prof_dict, algorithm)
+    if algorithm_type != None and prof_dict[algorithm_type][algorithm] != CODE_BUILT_IN:
+        del prof_dict[algorithm_type][algorithm]
+    data_write_prof(prof_dict)
 

@@ -30,7 +30,13 @@ def find_type(prof_dict, algorithm):
     return None
 
 def prof_list ():
-    return data_read_prof()
+    #return(data_read_prof())
+    display_list = str()
+    for algorithm_type, algorithms in data_read_prof().items():
+        display_list += '%s\n'%(algorithm_type)
+        for algorithm, code in algorithms.items():
+            display_list += '\t%s\t%s\n'%(algorithm, code)
+    return display_list
 
 def prof_new (type, algorithm):
     prof_dict = data_read_prof()

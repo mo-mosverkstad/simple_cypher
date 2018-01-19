@@ -26,7 +26,6 @@ PROMPT_ROOT   = 'SCC:>'
 PROMPT_PROF   = 'PROF:>>'
 PROMPT_EXIT   = 'EXIT'
 
-
 COMMAND_EXIT = 'exit'
 COMMAND_PROFILE = 'prof'
 COMMAND_UP = 'up'
@@ -35,7 +34,6 @@ COMMAND_DEC = 'dec '
 COMMAND_EDIT = 'edit'
 COMMAND_LIST = 'list'
 COMMAND_NEW = 'new'
-COMMAND_EDIT = 'edit'
 COMMAND_DELETE = 'delete'
 
 CONFIG_HOWTO = 'enc'
@@ -119,7 +117,6 @@ def scc_wrapper(howto=CONFIG_HOWTO, algorithm=CONFIG_ALGORITHM, key=CONFIG_KEY):
             text = command[4:]
             prof = howto + '#' + algorithm + '#' + key
             print(handle_cypher(text, handle_profile(prof)))
-            
 
 
 scc_wrapper()

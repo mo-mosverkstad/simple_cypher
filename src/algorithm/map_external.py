@@ -1,6 +1,6 @@
 from .base_mapping import base_mapping
 
-class external(base_mapping):
+class map_external(base_mapping):
     def __enc_dict(self):
         return dict(zip(self.whole_list, eval(self.key)))
 

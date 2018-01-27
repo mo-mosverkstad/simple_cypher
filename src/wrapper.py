@@ -120,3 +120,4 @@ def scc_wrapper(howto=CONFIG_HOWTO, algorithm=CONFIG_ALGORITHM, key=CONFIG_KEY):
 
 
 scc_wrapper()
+print('Scc had been shut down.')

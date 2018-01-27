@@ -17,6 +17,21 @@ class base_mapping:
     def __digit_list(self):
         return self.__generate_ascii_list(48, 58)
 
-    def cypher(self, text, enc_dict, dec_dict):
+    def plainList(self):# this i will change
+        return self.whole_list
+
+    def encList(self):# this i will change
+        return self.whole_list
+
+    def enc_key(self):
+        return dict(zip(self.plainList(),self.encList()))
+
+    def dec_key(self):
+        return dict(zip(self.encList(),self.plainList()))
+
+    def __inner_cypher(self, text, enc_dict, dec_dict):
         codec_dict = enc_dict if self.howto == 'enc' else dec_dict
         return ''.join([codec_dict[c] for c in text])
+
+    def cypher(self,text):
+        return self.__inner_cypher(text,self.enc_key(),self.dec_key())

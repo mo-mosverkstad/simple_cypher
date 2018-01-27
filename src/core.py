@@ -15,7 +15,4 @@
 # handle_cypher(text, algorithm_obj) -> encrypted or decrypted text or error
 
 def handle_cypher(text, algorithm_obj):
-    try:
-        return algorithm_obj.cypher(text)
-    except:
-        return 'Error: profile is wrong!'
+    return algorithm_obj.cypher(text)

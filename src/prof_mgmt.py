@@ -1,7 +1,7 @@
 # ========================= CODING FILE INFORMATION ========================= #
 # File         : prof_mgmt.py
 # Date         : 2018-Jan-04
-# Last modified: 2018-Jan-07
+# Last modified: 2018-Feb-02
 #
 # Author       : Mo
 #
@@ -18,7 +18,7 @@
 # prof_edit (algorithm, code) -> None
 # prof_delete (algorithm) -> None
 
-from data_mgmt import data_read_prof, data_write_prof
+from data_mgmt import data_read_prof, data_write_prof, algorithm_write_in, algorithm_remove
 
 CODE_BUILT_IN = '<built in>'
 
@@ -43,12 +43,13 @@ def prof_new (type, algorithm):
     prof_dict[type][algorithm] = ''
     data_write_prof(prof_dict)
 
-def prof_edit (algorithm, code):
+def prof_edit (algorithm, fcode,scode, descryption):
     prof_dict = data_read_prof()
     algorithm_type = find_type(prof_dict, algorithm)
     if algorithm_type != None and prof_dict[algorithm_type][algorithm] != CODE_BUILT_IN:
-        prof_dict[algorithm_type][algorithm] = code
+        prof_dict[algorithm_type][algorithm] = descryption
     data_write_prof(prof_dict)
+    algorithm_write_in(algorithm_type,algorithm,fcode,scode)
 
 def prof_delete (algorithm):
     prof_dict = data_read_prof()
@@ -56,4 +57,10 @@ def prof_delete (algorithm):
     if algorithm_type != None and prof_dict[algorithm_type][algorithm] != CODE_BUILT_IN:
         del prof_dict[algorithm_type][algorithm]
     data_write_prof(prof_dict)
+    algorithm_remove(algorithm)
 
+
+
+prof_new('mapping', 'NewCaesar')
+prof_edit('NewCaesar',['return self.whole_list'],['return self.whole_list[int(self.key):] + self.whole_list[:int(self.key)]'],'This is only a test')
+prof_delete('NewCaesar')

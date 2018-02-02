@@ -1,8 +1,7 @@
 # ========================= CODING FILE INFORMATION ========================= #
 # File         : prof_mgmt.py
 # Date         : 2018-Jan-07
-# Last modified: 2018-Jan-07
-#
+# Last modified: 2018-Feb-02
 # Author       : Mo
 #
 # Description  : This file is used for data management
@@ -14,6 +13,10 @@
 
 # data_read_prof () -> the dictionary of prof
 # data_write_prof(prof_dict) -> None
+# algorithm_write_in(type,algorithm,plaincode=None,enccode=None) -> None
+# algorithm_remove(algorithm) -> None
+
+import os
 
 data_prof_file = 'scc_prof.data'
 data_delimitor = ';'
@@ -34,3 +37,19 @@ def data_write_prof(prof_dict):
         for algorithm_type, contents in prof_dict.items():
             for algorithm, code in contents.items():
                 f.write(algorithm_type + data_delimitor + algorithm + data_delimitor + code + '\n')
+
+
+def algorithm_write_in(type,algorithm,plaincode=None,enccode=None):
+    f = open('algorithm\\'+algorithm+'.py','w')
+    f.write(f'from .base_{type} import base_{type} \n')
+    f.write(f'class {algorithm}(base_{type}):\n')
+    f.write(f'    def plainList(self):\n')
+    for i in plaincode:
+        f.write(f'        ' + i+'\n')
+    f.write(f'    def encList(self):\n')
+    for i in enccode:
+        f.write(f'        ' + i+ '\n')
+    f.close()
+
+def algorithm_remove(algorithm):
+    os.remove('algorithm\\'+algorithm+'.py')

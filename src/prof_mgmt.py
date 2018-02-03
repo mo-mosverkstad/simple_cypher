@@ -61,6 +61,3 @@ def prof_delete (algorithm):
 
 
 
-prof_new('mapping', 'NewCaesar')
-prof_edit('NewCaesar',['return self.whole_list'],['return self.whole_list[int(self.key):] + self.whole_list[:int(self.key)]'],'This is only a test')
-prof_delete('NewCaesar')

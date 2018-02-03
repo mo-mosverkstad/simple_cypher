@@ -2,7 +2,8 @@ class base_mapping:
     def __init__(self, howto, key):
         self.howto = howto
         self.key = key
-        self.whole_list = self.__lowcase_list() + self.__upcase_list() + self.__digit_list()
+        #self.whole_list = self.__lowcase_list() + self.__upcase_list() + self.__digit_list()
+        self.whole_list = self.__whole_ascii_list()
         self.type = 'MAPPING'
 
     def __generate_ascii_list(self, start, stop):
@@ -16,6 +17,9 @@ class base_mapping:
 
     def __digit_list(self):
         return self.__generate_ascii_list(48, 58)
+
+    def __whole_ascii_list(self):
+        return self.__generate_ascii_list(0, 255)
 
     def plainList(self):# this i will change
         return self.whole_list

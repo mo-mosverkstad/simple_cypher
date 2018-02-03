@@ -20,7 +20,7 @@ import re
 import sys
 from profile import handle_profile
 from core import handle_cypher
-from prof_mgmt import prof_list, prof_new, prof_edit, prof_delete
+from prof_mgmt import prof_list, prof_new, prof_edit, prof_delete, find_type, data_read_prof
 
 PROMPT_ROOT   = 'SCC:>'
 PROMPT_PROF   = 'PROF:>>'
@@ -73,8 +73,16 @@ def system_prof_edit(current_status, algorithm, key):
     check = input('Are you sure that you want go into edit mode? Answer yes or no:')
     if check == 'yes':
         algorithm_name = input('Please input algorithm name(in edit mode):')
-        code           = input('Please input your new code here          :')
-        prof_edit(algorithm_name,code)
+        descryption    = input('Please input your new description here   :')
+        fcode = input('Please input plaintext list:').split('\n')
+        if fcode == ['']:
+            gettype = find_type(data_read_prof(),algorithm)
+            if gettype == 'mapping':
+                fcode = ['return self.whole_list']
+            elif gettype == 'transposition':
+                fcode = ['return list(range(len(text)))']
+        scode = input('Please input encrypt list:').split('\n')
+        prof_edit(algorithm_name,fcode,scode,descryption)
     return current_status, algorithm, key
 
 def system_prof_del(current_status, algorithm, key):

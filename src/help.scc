@@ -1,0 +1,36 @@
+SCC is short for simple cypher coding
+This system will make easier to make a new cypher type
+When you get in this system you are in root that prompt will be SCC:>
+You can type exit anywhere for exiting this system
+In root you can type:
+prof: that you can go into profile mode
+edit: you can edit the cypher mode
+enc ...: you encrypt a text
+dec ...: you decrypt a encrypted text
+In profile you can type:
+new:
+  In new you create a new type of a cypher
+  First you will see Please input algorithm type
+  You had to write in algorithm type
+  It have 2 algorithm types: mapping, transposition
+  Then you had to press algorithm name
+edit:
+  important: you can't edit a built-in cypher type
+  First you had to answer the system yes or no to edit
+  If you answer yes you had to tell this system witch algorithm name that you want to edit
+  Then you write in the descryption.
+  After that you had to type in how you want to enc or dec
+  You will first generate plainlist and enclist
+  for example:
+    when you use caesar the plainlist is [a,b,c,d,e,f, ....,z] and encList is [c,d,e,f,g, ....,z,a,b] if key is 3
+	when you use reverse the plainlist is [0,1,2,3,4,5,6,7] and encList is [7,6,5,4,3,2,1,0] if text had 8 chars(bytes if you use UTF-8)
+  Also you had to code this plainlist and encList
+  delete:
+    You had to type delete to delete something
+	When you are going to delete system will ask you to be sure to delete right thing
+In edit mode you had to generate plainlist and encList
+It had some varible that called self.key, self.whole_list(only can be used in mapping)
+You use it just like normal coding. Just only very very small difference(varibles and you can't define a function)
+If you want to add a newline you just write ; because you don't use this symbol in regular coding
+| You can use it here |
+v                     v

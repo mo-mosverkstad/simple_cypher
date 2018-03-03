@@ -1,7 +1,7 @@
 class base_transposition:
     def __init__(self, howto, key):
         self.howto = howto
-        self.key = key
+        self.key = int(key)
         self.type = 'TRANSPOSITION'
 
     def plainList(self,text):#this i will change

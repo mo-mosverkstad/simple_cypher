@@ -43,10 +43,14 @@ def algorithm_write_in(type,algorithm,plaincode=None,enccode=None):
     f = open('algorithm\\'+algorithm+'.py','w')
     f.write(f'from .base_{type} import base_{type} \n')
     f.write(f'class {algorithm}(base_{type}):\n')
-    f.write(f'    def plainList(self):\n')
+    if type == 'mapping':
+        args = '(self)'
+    elif type == 'transposition':
+        args = '(self,text)'
+    f.write(f'    def plainList{args}:\n')
     for i in plaincode:
         f.write(f'        ' + i+'\n')
-    f.write(f'    def encList(self):\n')
+    f.write(f'    def encList{args}:\n')
     for i in enccode:
         f.write(f'        ' + i+ '\n')
     f.close()

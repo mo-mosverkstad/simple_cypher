@@ -21,6 +21,7 @@ import sys
 from profile import handle_profile
 from core import handle_cypher
 from prof_mgmt import prof_list, prof_new, prof_edit, prof_delete, find_type, data_read_prof
+from printhelp import printhelp
 
 PROMPT_ROOT   = 'SCC:>'
 PROMPT_PROF   = 'PROF:>>'
@@ -35,6 +36,7 @@ COMMAND_EDIT = 'edit'
 COMMAND_LIST = 'list'
 COMMAND_NEW = 'new'
 COMMAND_DELETE = 'delete'
+COMMAND_HELP = 'help'
 
 CONFIG_HOWTO = 'enc'
 CONFIG_ALGORITHM = 'caesar'
@@ -74,14 +76,14 @@ def system_prof_edit(current_status, algorithm, key):
     if check == 'yes':
         algorithm_name = input('Please input algorithm name(in edit mode):')
         descryption    = input('Please input your new description here   :')
-        fcode = input('Please input plaintext list:').split('\n')
+        fcode = input('Please input plaintext list:').split(';')
         if fcode == ['']:
             gettype = find_type(data_read_prof(),algorithm)
             if gettype == 'mapping':
                 fcode = ['return self.whole_list']
             elif gettype == 'transposition':
                 fcode = ['return list(range(len(text)))']
-        scode = input('Please input encrypt list:').split('\n')
+        scode = input('Please input encrypt list:').split(';')
         prof_edit(algorithm_name,fcode,scode,descryption)
     return current_status, algorithm, key
 
@@ -98,7 +100,8 @@ def system_prof_del(current_status, algorithm, key):
 SCC_DICT = {PROMPT_ROOT:
                 {COMMAND_EXIT: 'system_exit',
                  COMMAND_PROFILE: 'system_profile',
-                 COMMAND_EDIT: 'system_config_edit'},
+                 COMMAND_EDIT: 'system_config_edit',
+                 COMMAND_HELP: 'printhelp'},
             PROMPT_PROF:
                 {COMMAND_EXIT: 'system_exit',
                  COMMAND_LIST: 'system_prof_list',
